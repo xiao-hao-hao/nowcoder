@@ -1,0 +1,48 @@
+
+//题目描述:
+//把二叉树打印成多行
+//从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
+//https://www.nowcoder.com/practice/445c44d982d04483b04a54f298796288
+/*
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+            val(x), left(NULL), right(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+        vector<vector<int> > Print(TreeNode* pRoot)
+        {
+            vector<vector<int> > result;
+            if(NULL == pRoot)
+                return result;
+            queue<TreeNode*> q1, q2;
+            q1.push(pRoot);
+            while(!q1.empty())
+            {
+                vector<int> tmp;
+                while(!q1.empty())//用q2来存放下一层的值的地址
+                {
+                    tmp.push_back(q1.front()->val);//tmp用来暂时存放某一层的值(相当于取出q1对应的值)
+                    if(NULL != q1.front()->left)
+                        q2.push(q1.front()->left);
+                    if(NULL != q1.front()->right)
+                        q2.push(q1.front()->right);
+                    q1.pop();
+                }
+                while(!q2.empty())//将q2里面的内容放到q1中
+                {
+                    q1.push(q2.front());
+                    q2.pop();
+                }
+                result.push_back(tmp);
+            }
+
+            return result;
+        }
+    
+};
