@@ -194,3 +194,51 @@ public:
         return pre;
     }
 };
+
+
+//题目描述
+//从尾到头打印链表
+//输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+/**
+*  struct ListNode {
+*        int val;
+*        struct ListNode *next;
+*        ListNode(int x) :
+*              val(x), next(NULL) {
+*        }
+*  };
+*/
+//方法1
+/*
+class Solution {
+public:
+    vector<int> printListFromTailToHead(ListNode* head)
+    {
+        ListNode *cur = head;
+        vector<int> ret;
+        while(cur)
+        {
+            ret.push_back(cur->val);
+            cur = cur->next;
+        }
+        reverse(ret.begin(), ret.end());
+        return ret;
+    }
+};
+*/
+
+//方法2
+class Solution {
+public:
+    vector<int> printListFromTailToHead(ListNode* head)
+    {
+        ListNode *cur = head;
+        vector<int> ret;
+        while(cur)
+        {
+            ret.insert(ret.begin(), cur->val);
+            cur = cur->next;
+        }
+        return ret;
+    }
+};
