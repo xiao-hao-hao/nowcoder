@@ -366,3 +366,51 @@ int main()
 	}
 	return 0;
 }
+
+
+题目描述：超长正整数相加
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+int main()
+{
+	string str1, str2;
+	while (cin >> str1 >> str2)
+	{
+		int len1 = str1.size() - 1;
+		int len2 = str2.size() - 1;
+		int n = len1 < len2 ? len1 : len2;
+		string result = len1 > len2 ? str1 : str2;
+		int m = len1 > len2 ? len1 : len2;
+		int tag = 0;
+		for (int i = 0; i <= n; ++i)
+		{
+			int sum = str1[len1 - i] + str2[len2 - i] - '0' - '0' + tag;
+			tag = 0;
+			if (sum > 9)
+			{
+				tag = 1;
+				result[m - i] = sum - 10 + '0';
+			}
+			else
+				result[m - i] = sum + '0';
+		}
+		while (tag == 1 && m - (++n) >= 0)
+		{
+			int sum = result[m - n] - '0' + tag;
+			tag = 0;
+			if (sum > 9)
+			{
+				tag = 1;
+				result[m - n] = sum - 10 + '0';
+			}
+			else
+				result[m - n] = sum + '0';
+		}
+		if (tag == 1)
+			result.insert(result.begin(), '1');
+		cout << result << endl;
+	}
+	return 0;
+}
