@@ -414,3 +414,60 @@ int main()
 	}
 	return 0;
 }
+
+题目描述
+inoc产品部 杨辉三角的变形
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<int> table(n * n + 1, 1);
+		int bre = 0;
+		if (n < 3)
+		{
+			cout << -1 << endl;
+			continue;
+		}
+		int i = 3, num = 5, tag = 5;
+		while (i <= n)
+		{
+			table[tag] = 1;
+			table[tag + 1] = 0 + table[tag - num + 2] + table[tag - num + 3];
+			if (table[tag + 1] % 2 == 0 && i == n)
+			{
+				cout << 2 << endl;
+				break;
+			}
+			for (int j = 2; j < num - 2; ++j)
+			{
+				table[tag + j] = table[tag + j - num + 2] + table[tag + j - num + 1] + table[tag + j - num];
+				if (table[tag + j] % 2 == 0 && i == n)
+				{
+					cout << j + 1 << endl;
+					bre = 1;
+					break;
+				}
+			}
+			if (bre == 1)
+				break;
+			table[tag + num - 2] = 0 + table[tag - num + 1] + table[tag - num];
+			if (table[tag + num - 2] % 2 == 0 && i == n)
+			{
+				cout << num - 1 << endl;
+				break;
+			}
+			table[tag + num - 1] = 1;
+			tag += num;
+			num += 2;
+			++i;
+		}
+		if (i > n)
+			cout << -1 << endl;
+	}
+	return 0;
+}
