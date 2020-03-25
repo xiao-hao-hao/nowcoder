@@ -626,3 +626,63 @@ int main()
 	}
 	return 0;
 }
+
+
+//mp3光标位置
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	int num, cur, top, bottom;
+	string op;
+	while (cin >> num >> op)
+	{
+		int op_len = op.size();
+		cur = 1, top = 1, bottom = 4;
+		for (int i = 0; i < op.size(); ++i)
+		{
+			if (op[i] == 'U')
+			{
+				if (cur == top && top == 1 && num > 3)
+				{
+					top = num - 3;
+					bottom = num;
+					cur = num;
+				}
+				else if (cur == top && num > 3)
+				{
+					--cur;
+					--top;
+					--bottom;
+				}
+				else
+					cur = (cur + num - 2) % num + 1;
+			}
+			if (op[i] == 'D')
+			{
+				if (cur == bottom && cur == num)
+				{
+					top = 1;
+					bottom = 4;
+					cur = 1;
+				}
+				else if (cur == bottom)
+				{
+					++cur;
+					++top;
+					++bottom;
+				}
+				else
+					cur = cur % num + 1;
+			}
+		}
+		num = num < 4 ? num : 4;
+		for (int i = 0; i < num - 1; ++i)
+			cout << top + i << ' ';
+		cout << top + num - 1 << endl;
+		cout << cur << endl;
+	}
+	return 0;
+}
