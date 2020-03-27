@@ -723,3 +723,47 @@ int main()
 	}
 	return 0;
 }
+
+
+//计算字符串的距离
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int Min(int a, int b, int c)
+{
+	return (a<b ? a : b)<c ? (a<b ? a : b) : c;
+}
+
+int calStringDistance(string charA, string charB)
+{
+	int An = charA.size(), Bn = charB.size();
+	vector<vector<int> > dp(Bn + 1, vector<int>(An + 1, 0));
+	dp[0][0] = 0;
+	for (int i = 1; i <= An; ++i)
+		dp[0][i] = i;
+	for (int i = 1; i <= Bn; ++i)
+		dp[i][0] = i;
+	for (int i = 1; i <= Bn; ++i)
+	{
+		for (int j = 1; j <= An; ++j)
+		{
+			if (charB[i-1] == charA[j-1])
+				dp[i][j] = dp[i - 1][j - 1];
+			else
+				dp[i][j] = Min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1;
+		}
+	}
+	return dp[Bn][An];
+}
+
+int main()
+{
+	string charA, charB;
+	while (cin >> charA >> charB)
+	{
+		cout << calStringDistance(charA, charB) << endl;
+	}
+	return 0;
+}
