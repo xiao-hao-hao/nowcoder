@@ -792,3 +792,43 @@ public:
 		return 0;
 	}
 };
+
+
+//寻找第一个在字符串中只出现一次的字符
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		int tag = 0;
+		char ch;
+		while (str.size() != 0)
+		{
+			tag = 0;
+			ch = str[0];
+			str.erase(str.begin());
+			string::iterator pos = str.begin();
+			while (pos != str.end())
+			{
+				if (ch == *pos)
+				{
+					tag = 1;
+					pos = str.erase(pos);
+					continue;
+				}
+				++pos;
+			}
+			if (tag == 0)
+				break;
+		}
+		if (tag == 1)
+			cout << -1 << endl;
+		else if (tag == 0)
+			cout << ch << endl;
+	}
+	return 0;
+}
