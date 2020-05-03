@@ -982,6 +982,7 @@ int main()
 }
 
 /*
+//求正数数组的最小不可组成和
 class Solution {
 public:
 	int getFirstUnFormedNum(vector<int> arr, int len)
@@ -1022,10 +1023,7 @@ public:
     }
 };
 */
-
-
-
-//求正数数组的最小不可组成和
+//优化
 class Solution {
 public:
 	int getFirstUnFormedNum(vector<int> arr, int len)
