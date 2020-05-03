@@ -981,6 +981,7 @@ int main()
 	return 0;
 }
 
+<<<<<<< HEAD
 /*
 //求正数数组的最小不可组成和
 class Solution {
@@ -1055,3 +1056,5 @@ public:
         return max + 1;
     }
 };
+=======
+>>>>>>> 91fff60f3ff01e37eb19f9db4e340fe8de7eb870
